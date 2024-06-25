@@ -4,16 +4,39 @@ import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 import 'dart:math';
 
-void main() => runApp(const ExpensesApp());
+void main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
-  const ExpensesApp({super.key});
+  ExpensesApp({super.key});
+
+  final ThemeData tema = ThemeData();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Expenses',
-      home: HomePage(),
+      home: const HomePage(),
+      theme: tema.copyWith(
+        colorScheme: tema.colorScheme.copyWith(
+          primary: Colors.purple,
+          secondary: Colors.amber,
+        ),
+        textTheme: tema.textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -80,12 +103,12 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const SizedBox(
+            SizedBox(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Theme.of(context).colorScheme.primary,
                 elevation: 5,
-                child: Text('Chart'),
+                child: const Text('Chart'),
               ),
             ),
             TransactionList(_transactions),
