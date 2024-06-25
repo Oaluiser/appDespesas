@@ -1,6 +1,5 @@
-import 'package:expenses/models/transaction.dart';
+import 'package:expenses/components/transaction_user.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() => runApp(const ExpensesApp());
 
@@ -9,7 +8,7 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Expenses',
       home: HomePage(),
     );
@@ -17,22 +16,7 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      value: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Weekly Groceries',
-      value: 16.53,
-      date: DateTime.now(),
-    ),
-  ];
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +24,9 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Expenses'),
       ),
-      body: Column(
+      body: const Column(
         children: <Widget>[
-          const SizedBox(
+          SizedBox(
             width: double.infinity,
             child: Card(
               color: Colors.blue,
@@ -50,49 +34,7 @@ class HomePage extends StatelessWidget {
               child: Text('Chart'),
             ),
           ),
-          Column(
-            children: _transactions.map((tr) {
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.purple,
-                          width: 2,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text("R\$ ${tr.value.toStringAsFixed(2)}",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.purple,
-                          )),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(tr.title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        Text(DateFormat("d MMM y").format(tr.date),
-                            style: const TextStyle(
-                              color: Colors.grey,
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+          TransactionUser()
         ],
       ),
     );
